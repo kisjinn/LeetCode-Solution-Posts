@@ -1,0 +1,25 @@
+Intuition
+Lets say s2=sum[0, j] ans s1=sum[0, i] where i<j
+
+Divident=divisor*quotient + remainder
+s2=kn+ x
+s1=km+ x
+then => s2-s1=k(n-m)
+that means the subarray between s1.end to s2.end will be multiple of k that means it will be divisible by k
+
+So,we need to find out for current index j, how many index i (i < j) exist that has the same mod of K.
+
+Approach
+1.We will create HashMap <remainder, frequency>
+1.1.put (0,1) in hashmap which says that freq of remainder 0 is 1 so that if we get rem 0 for first time while iterating through map then we can add 1 to ans
+
+2.calculate remainder = prefix_sum(i)%k so if remainder(s2) is already there in map(s1) that means subarray sum divisible by k exist between s1.end_index to s2.end_index
+
+2.if remainder is negative add the given k to it, it will convert into its positive equivalent which helps us in getting feasible solution.
+
+Complexity
+Time Complexity: O(N)
+Space Complexity: O(K)
+
+
+Leetcode Solution: https://leetcode.com/problems/subarray-sums-divisible-by-k/solutions/3805517/java-easy-solution-t-c-o-n-hashmap-prefix-sum/
