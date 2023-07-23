@@ -1,0 +1,14 @@
+Intuition
+Separate out nodes with values < x into one Linked List and nodes with value > x into second Linked List. After that, connect two linked List
+
+Approach
+1.Take two Linked List, one list will contain all nodes having value < x and second Linked List will contain all nodes having value >= x
+2.After separating out nodes into two linkked List, connect Linked list1 to Linked list2
+
+Complexity
+Time complexity:O(n)
+
+Space complexity:O(n)
+
+
+https://leetcode.com/problems/partition-list/solutions/3796435/java-easy-solution-tc-on/
