@@ -1,0 +1,32 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n=nums.length;
+        //first we will keep elements at its correct position in array
+        int i=0;
+        while(i<n){
+            int correct_index=nums[i]-1;
+            //check if an element is in range then only go further
+            if(nums[i]>0 && nums[i]<=n)
+            {
+            if(nums[correct_index]!=nums[i]){
+                 int temp=nums[i];
+                 nums[i]=nums[correct_index];
+                 nums[correct_index]=temp;
+             }
+             else{
+                 i++;
+             }
+            }
+            else{
+                i++;
+            }        
+        }
+        for(int j=0;j<n;j++){
+            if(nums[j]!=(j+1)){
+                return j+1;
+            }
+        }
+        return n+1;
+        
+    }
+}

@@ -1,0 +1,16 @@
+Intuition
+PLace the element at its corerct position in first part. In second part, iterate through an array and element which is not at correct position, return that element.
+
+Approach
+We will breakdown solution in 2 parts
+a) PLace the elements at its correct index e.g 1 should be present at 0th index, 2 at 1st index.......................
+b) After above opeartions, element will be at correct position
+Now, iterate through array and check element which is not at its correct position and return it.
+
+Complexity
+Time complexity:O(n)
+
+Space complexity:O(1)
+
+
+Source: https://leetcode.com/problems/first-missing-positive/post-solution/
