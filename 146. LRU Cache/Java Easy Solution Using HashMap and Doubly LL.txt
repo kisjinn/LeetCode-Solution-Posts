@@ -1,0 +1,9 @@
+Approach
+1.We will implement cache using HashMap<Key,Node> where key=Node.key value=Node(as Node will contain address of node in doubly LL) and we will use Doubly linked list to keep track of lease recently used nodes 
+(Note: Using Doubly LL as operation will take O(1) complexity)
+2.Initially we will add -1 at head and tail of Doubly LL
+3.If map alreday contains key then remove key from map and remove node from LL from old position .Insert key as newNode at latest position as it will be latest used and insert newNode in map with new address.
+4.If cache reaches its limit then before inserting new element delete the least recently used node from LL as well as from map.
+
+
+Source:https://leetcode.com/problems/lru-cache/solutions/3806225/java-easy-solution-using-hashmap-and-doubly-ll/

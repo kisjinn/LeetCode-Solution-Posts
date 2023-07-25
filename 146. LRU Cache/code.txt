@@ -1,0 +1,83 @@
+// Definition for doubly-linked list.
+  class Node {
+     int key;
+     int val;
+     Node next, prev;
+     Node(int _key, int _val) { 
+       this.key=_key;
+       this.val = _val; 
+       }
+ };
+class LRUCache {
+    // Define first and last node of doubly LL
+    Node head=new Node(-1, 0);
+    Node tail=new Node(-1, 0);
+    // Define hashmap where key=Node.key value=Node(as node will contain address of node in doubly LL)
+    HashMap<Integer, Node> map=new HashMap<>();
+    int capacity;
+    
+ public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    
+    public int get(int key) {
+    if(map.containsKey(key)){
+        //if map alreday contains key then 
+        //renove key from map
+        //remove node from LL from old position and insert it at latest position as it will be latest used
+        //insert newNode in map with new address
+        Node newNode=map.get(key);
+        remove(newNode);
+        insert(newNode);
+        return newNode.val;
+
+    }
+    else{
+        return -1;
+    }
+        
+    }
+    
+    
+    public void put(int key, int value) {
+        if(map.containsKey(key)){
+            //if cache(map) already contains key then remove that key from map and LL and then insert it at most frequent place of LL
+            remove(map.get(key));
+         
+        }
+        if(map.size()==capacity){
+            //remove least recently used node from LL and map as well
+            remove(head.next);
+        }
+        //set node in LL and map
+            insert(new Node(key, value));
+            
+        
+        
+    }
+    private void remove(Node temp){
+    map.remove(temp.key);
+    temp.prev.next=temp.next;
+    temp.next.prev=temp.prev;
+    }
+    private void insert(Node node){
+        map.put(node.key, node);
+        Node previous_nod=tail.prev;
+        previous_nod.next=node;
+        node.prev=previous_nod;
+        tail.prev=node;
+        node.next=tail;
+
+    }
+}
+
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
