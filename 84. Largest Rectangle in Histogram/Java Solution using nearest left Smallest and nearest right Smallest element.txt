@@ -1,0 +1,21 @@
+# Intuition
+(nsr=Nearest Smallest right element index, nsl=Nearest Smallest Left element index)
+for a bar height[i], maximum area that can form within height[i] will lie between nsr and nsl
+so length=height[i]
+   width=distance between nsr and nsl - 1
+
+
+# Approach
+1.Find nearest left smallest element index for each heights[i] 
+2.Find nearest right smallest element index for each heights[i] 
+3.length=heights[i]
+  breadth=nsr-nsl-1
+  area=length*breadth
+
+# Complexity
+- Time complexity: O(N)
+
+- Space complexity:O(N)
+
+
+You can check my solution here: https://leetcode.com/problems/largest-rectangle-in-histogram/solutions/3813491/java-solution-using-nearest-left-smallest-and-nearest-right-smallest-element/
