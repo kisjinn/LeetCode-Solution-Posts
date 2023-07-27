@@ -1,0 +1,38 @@
+class Solution {
+    public int maximumSum(int[] nums) {
+        HashMap<Integer, ArrayList<Integer>> map=new HashMap<>();
+        
+        int ans=-1;
+        for(int i=0;i<nums.length;i++){
+            int ele=nums[i];
+            int sum=0;
+            while(ele>0){
+                sum+=(ele%10);
+                ele=ele/10;
+            }
+            //put ele and its digit sum in map so that if we get any element with equal sum then we can add it to nums[i] and calculate maximum ans
+            
+            ArrayList<Integer> list=new ArrayList<>();
+            if(map.containsKey(sum))
+            {
+                list=map.get(sum);
+                for(int j=0;j<list.size();j++){
+                ans=Math.max(ans,list.get(j)+nums[i]);
+                }
+                
+                
+            }
+            //update map with current element 
+            //if sum for current element is already present then add current element to list with key=sum
+            //if sum is not present then put in map with key=sum and value=list(current elemnt)
+             list.add(nums[i]);
+             map.put(sum, list);
+            
+            
+        }
+        return ans;
+
+
+        
+    }
+}

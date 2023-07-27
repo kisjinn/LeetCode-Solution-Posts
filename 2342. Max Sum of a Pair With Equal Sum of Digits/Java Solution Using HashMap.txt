@@ -1,0 +1,6 @@
+Time complexity:O(N)
+
+Space complexity:O(N)
+
+
+You can check my Solution here: https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/post-solution/
