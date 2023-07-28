@@ -1,0 +1,29 @@
+Intuition
+For right angled triangle, it should satisfy following 3 conditions (a,b and c are sides of triangle)
+a+b>c
+a+c>b
+b+c>a
+
+Suppose c>a+b then 2nd and 3rd condition is going to satisfy automatically so always keep the c at index with value greater than a and b
+
+Approach
+Steps:
+1.Sort the array in increasing order
+2.After sorting ,initially c as n-1 (intially as loop will be going for c from n-1 to 2 as at last c can be at 2nd, b at 1st and a at 0th index.
+b=c-1 , a=0
+(Keeping c at fixed index, we will be moving a and b in order to satisfy the condition a+b>c) .
+3.while(a<b)
+check the nums[a] + nums[b] > nums[c] ,
+if this exists then
+-for all the values after the nums[left],the condition nums[a] + nums[b] > nums[c] is going to satisfy, store (b-a) count in ans
+-decrement b
+else
+-increment a as we need to maximize sum so that it becoms greater than nums[c]
+4.return ans
+
+Complexity
+Time complexity: O(N2)
+Space complexity:O(1)
+
+
+Source: https://leetcode.com/problems/valid-triangle-number/solutions/3792283/java-solution-using-two-pointers/
