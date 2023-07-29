@@ -1,0 +1,11 @@
+Intuition
+Concept/Solution of 84.Largest rectangle in histogram is applicable in this problem
+
+Approach
+1.In histogram, we find the next smaller element and the previous smaller element,using which we find the maximum rectangle in histogram
+2.First of all we make an array of size equal to column size pass each one dimensional array to largestRectangleArea() function
+-we add matri[i][j] to current_row[j] if 1 else make current_row[j] = 0.
+3.Thus for each row we calculate the largest rectangle and return maximum of all calculated rectangle.
+
+
+You can check my Solution here: https://leetcode.com/problems/maximal-rectangle/solutions/3819189/java-solution-using-next-smaller-element-the-previous-smaller-element/
