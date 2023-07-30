@@ -1,0 +1,12 @@
+# Approach
+1.For each building find prev maximum height bar to it using prefix sum
+2.for each bar, find next maximum height bar to it using suffix sum
+3.for height[i] bar, Water trapped by height[i] bar= Math.min(prefix[i], suffix[i]) - height[i]
+4.calculate water trapped by each building and return it
+
+# Complexity
+- Time complexity:O(N)
+
+- Space complexity:O(N)
+
+You can find my Solution here: https://leetcode.com/problems/trapping-rain-water/solutions/3819020/java-solution-using-prefix-sum-and-prefix-sum-t-c-o-n/

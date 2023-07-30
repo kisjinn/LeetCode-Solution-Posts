@@ -1,0 +1,25 @@
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        //calculate prefix greater bar and suffix greater bar for each of the bars
+        int pf[]=new int[n];
+        pf[0]=height[0];
+        for(int i=1;i<n;i++){
+            pf[i]=Math.max(height[i], pf[i-1]);
+        }
+        int sf[]=new int[n];
+        sf[n-1]=height[n-1];
+        for(int j=n-2;j>=0;j--){
+            sf[j]=Math.max(height[j], sf[j+1]);
+        }
+        int water=0;
+        //1st and last bar will not trap any water
+        for(int i=1;i<n-1;i++){
+         water=water + ((Math.min(pf[i],sf[i]))-height[i]);
+        }
+        return water;
+        
+    }
+}
+
+
