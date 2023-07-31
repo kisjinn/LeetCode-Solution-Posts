@@ -1,0 +1,40 @@
+# Intuition
+As nums[i]<nums[k]<nums[j] so iterate from n-1 to 0 and find out nums[k] and store it in a variable.
+
+# Approach
+1.If arr_element > stack_top_elemnt then store (nums[k])third_element=stack_top_elemnt and pop all element till stack becomes empty.
+  Insert arr_element in stack considering it nums[j]
+2.while iterating in backward direction, if arr_element<third element then consider arr_element as nums[i] which will satisfy condition nums[i]<nums[k](third_elemnt)
+
+
+- Time complexity:O(n)
+
+- Space complexity:O(n)
+
+Solution link:https://leetcode.com/problems/132-pattern/solutions/3807896/java-solution-using-stack/
+
+class Solution {
+    public boolean find132pattern(int[] nums) {
+        int n=nums.length;
+        //Stack will store nums[j] and nums[k]
+        Stack<Integer> stack=new Stack<>();
+        //third element will be the nums[k]
+        int third_element=Integer.MIN_VALUE;
+        for(int i=n-1;i>=0;i--){
+        //if top element < curre_element then that means top element can be nums[k] and curr_ele can be nums[j]
+        while(!stack.isEmpty() && nums[i]>stack.peek()){
+            third_element=stack.pop();
+        }
+    //if current_element<third_element then current element can be the nums[i] as nums[i]<third_element<nums[j]
+        if(nums[i]<third_element){
+        return true;
+        }
+        stack.push(nums[i]);
+        }
+        return false;
+        
+    }
+}
+
+
+
