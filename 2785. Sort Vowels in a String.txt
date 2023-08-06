@@ -1,0 +1,45 @@
+Approach
+1.Store frequency of vowel characters in ferquency array of size 128
+2.Iterate over string and replace vowel by vowel character of array
+
+Complexity
+Time complexity:O(N)
+
+Space complexity:O(1)
+
+
+
+class Solution {
+    public String sortVowels(String s) {
+        StringBuilder ans = new StringBuilder();
+        int[] freq = new int[128]; // Use 128 characters to cover all ASCII characters.
+
+        for (int i = 0; i < s.length(); i++) {
+            if (isVowel(s.charAt(i))) {
+                freq[s.charAt(i)]++;
+            }
+        }
+        int k=0;
+        for (int j = 0; j < s.length(); j++) {
+            if (isVowel(s.charAt(j))) {
+                while (freq[k] == 0) {
+                    k++; // Move to the next vowel character if the current one is not present.
+                }
+                ans.append((char)k); // Append the vowel to the answer.
+                freq[k]--; // Decrease the frequency after using the vowel.
+            } else {
+                ans.append(s.charAt(j)); // Append non-vowel characters directly.
+            }
+        }
+
+        return ans.toString();
+    }
+
+    private boolean isVowel(char c) {
+        return "aeiouAEIOU".indexOf(c) != -1; // Use indexOf to check for vowels.
+    }
+}
+
+
+you can check my solution here:https://leetcode.com/problems/sort-vowels-in-a-string/solutions/3822600/java-easy-solution-t-c-o-n-s-c-o-1/
+
