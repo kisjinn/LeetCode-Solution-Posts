@@ -1,0 +1,61 @@
+You can find my solution here: https://leetcode.com/problems/populating-next-right-pointers-in-each-node/solutions/3875813/easy-java-solution-100-efficient/
+
+Complexity
+Time complexity:O(n)
+
+Space complexity:O(1)
+
+Code
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
+
+    public Node() {}
+    
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
+*/
+
+class Solution {
+    public Node connect(Node root) {
+    //Below solution works in O(1) space
+        Node curr=root;
+        if(root==null){
+            return null;
+        }
+        if(root.right==null && root.left==null){
+            root.next=null;
+        }
+        while(curr.left!=null){
+            Node s=curr;
+            while(curr!=null){
+                 // Connect the left child's next pointer to the right child
+                if (curr.left != null) {
+                    curr.left.next = curr.right;
+                }
+
+                // Connect the right child's next pointer to the next node's left child
+                if (curr.right != null && curr.next != null) {
+                    curr.right.next = curr.next.left;
+                }
+           
+            curr=curr.next;
+            }
+            curr=s.left;
+        }
+       return root; 
+    }
+}
