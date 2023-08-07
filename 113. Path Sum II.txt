@@ -1,0 +1,61 @@
+You can check my Solution here: https://leetcode.com/problems/path-sum-ii/solutions/3879075/easy-java-solution-using-same-intuition-as-path-sum-i/
+
+# Intuition
+Same approach as Path Sum I is applicable for this problem
+Everytime, we will be creating a deep copy of smallAns to add the leaf node
+After traversing Left and rightSubtree , we will removing last element as we are returning to the one level above.
+
+
+# Complexity
+- Time complexity:O(n)
+
+- Space complexity:O(h)
+
+Code:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> smallAns=new ArrayList<>();
+        calculate(root, targetSum,ans,smallAns);
+        return ans;
+    }
+    private void calculate(TreeNode root, int targetSum,List<List<Integer>> ans, List<Integer> smallAns){
+        if(root==null){
+            return;
+        }
+        else if(root.left==null && root.right==null){
+            if(root.val==targetSum){
+             List<Integer> l=new ArrayList<>(smallAns);
+             l.add(root.val);
+             ans.add(l);
+            }
+            return;
+        }
+        smallAns.add(root.val);
+        calculate(root.left, targetSum-root.val,ans,smallAns);
+        calculate(root.right, targetSum-root.val,ans,smallAns);
+        smallAns.remove(smallAns.size()-1);
+        
+    }
+}
+
+
+
+
+
+
