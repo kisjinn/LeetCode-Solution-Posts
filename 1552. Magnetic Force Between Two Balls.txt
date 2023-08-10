@@ -1,0 +1,41 @@
+class Solution {
+    public int maxDistance(int[] position, int m) {
+        int n=position.length;
+        //sort the position array so that we can calculate the range of distance 
+        Arrays.sort(position);
+        //range of distance will be 1 to (max_ele-min_ele)
+        int s=1,e=(position[n-1]-position[0]), ans=0;
+        while(s<=e){
+            int mid=s+((e-s)/2);
+            //we will check is it possible to put "m" balls at "mid" distance 
+            if(isPossible(position,mid,m)){
+             //if possible then "mid" can be possible ans
+             ans=mid;
+             //check for more max distance
+             s=mid+1;
+            }
+            else{
+                e=mid-1;
+            }
+        }
+        return ans;
+        
+    }
+    private boolean isPossible(int[] pos,int mid,int m){
+        int prev_pos=pos[0], distance=0;
+        int count=1;
+        for(int i=1;i<pos.length;i++){
+            distance=pos[i]-prev_pos;
+            if(distance>=mid){
+                prev_pos=pos[i];
+                count++;
+            }
+            if(count==m){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+You can check my Solution here: https://leetcode.com/problems/magnetic-force-between-two-balls/solutions/3823195/java-solution-using-binary-search/
