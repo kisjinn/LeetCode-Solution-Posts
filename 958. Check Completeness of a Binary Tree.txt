@@ -1,0 +1,73 @@
+You can find my Solution here: https://leetcode.com/problems/check-completeness-of-a-binary-tree/solutions/3894815/java-solution-using-level-order-traversal/
+
+
+Approach:
+Simple approach would be to check whether the NULL Node encountered is the last node of the Binary Tree.
+
+If the null node encountered in the binary tree is the last node then it is a complete binary tree
+If there exists a valid node even after encountering a null node then the tree is not a complete binary tree.
+
+Complexity
+Time complexity:O(n)
+
+Space complexity:O(h)
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        //Basically we have to chekch whether given BT is complete BT or not
+        if(root==null){
+            return true;
+        }
+        Queue<TreeNode> q=new LinkedList<>();
+        q.add(root);
+        boolean isEmptyFound=false;
+        // Do level order traversal using queue.
+        while(!q.isEmpty()){
+            int n=q.size();
+            for(int i=0;i<n;i++){
+            TreeNode curr=q.poll();
+            //e.g   1
+            // null     3
+            
+             if(curr==null){
+        // If we have seen a null node,we set the flag to true
+                isEmptyFound=true;
+                
+            }
+            // If that null node is not the last node then return false
+            //when we will go to the node 3, we will find that isEmptyFound=true that means node before it is already empty so return false
+            else{
+            if(isEmptyFound==true){
+                return false;
+            }
+            else{
+                q.add(curr.left);
+                q.add(curr.right);
+            }
+            
+             }
+        }
+        }
+        return true;
+        
+}
+}
+
+
+
