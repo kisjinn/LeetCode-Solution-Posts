@@ -1,0 +1,55 @@
+You can find my Solution here: https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/solutions/3827860/java-solution-recursive/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+    if(inorder.length!=postorder.length){
+            return null;
+        }
+        TreeNode ans=builtTree(inorder,postorder,0, inorder.length-1, 0, postorder.length-1);
+        return ans;
+    }
+    //is: inorder start index, ie=inorder end index, ps=postrder start index, pe=postrder end index
+    private TreeNode builtTree(int[] inorder,int [] postorder, int is, int ie, int ps, int pe){
+        if(ps>pe || is>ie){
+            return null;
+        }
+        //pe th value will be the root of the tree
+    TreeNode rut=new TreeNode(postorder[pe]);
+    //search index of root node in inorder list
+    int rootIndex=search(inorder,rut.val);
+    //element on right 
+    int elementsOnRight=ie-rootIndex;
+    //Build tree of left side
+    rut.left=builtTree(inorder,postorder,is, rootIndex - 1, ps, pe - elementsOnRight - 1);
+    rut.right=builtTree(inorder,postorder,rootIndex + 1, ie, pe - elementsOnRight, pe - 1);
+    return rut;
+    
+
+    }
+    private int search(int[] inorder, int target){
+        for(int i=0;i<inorder.length;i++){
+            if(inorder[i]==target){
+                return i;
+            }
+        }
+        return -1;
+
+    }
+}
+
+
