@@ -1,0 +1,49 @@
+You can find my Solution here:https://leetcode.com/problems/k-closest-points-to-origin/solutions/3935937/java-solution-priority-queue/
+
+Approach
+1.calculate euclidean distance(i.e., √(x1 - x2)2 + (y1 - y2)2) for each array element
+2.we will be using maxHeap as we want k closest points to the origin (0, 0) i.e. points which are having less distance from origin
+3.Store elemnets in maxHeap (size k) on basis of euclidean distance i.e. elemnets having more euclidian distance will be the root of the heap
+
+Complexity
+Time complexity:O(nlogk)
+
+Space complexity:O(k)
+
+Code
+class Solution {
+    class Pair {
+        int indx;
+        int distance;
+        Pair(int index,int d){
+            indx=index;
+            distance=d;
+        }
+
+    }
+    public int[][] kClosest(int[][] points, int k) {
+    PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->b.distance - a.distance);
+     int n=points.length;
+     int m=points[0].length;
+     for(int i=0;i<n;i++){
+         //as we know 2 columns will be there for x-coordinate and y-coordinate
+             int x=points[i][0];
+             int y=points[i][1];
+             //x2 and y2 is(0,0) so no need to add
+             int euclidean_distance=((x*x)+(y*y));
+             pq.add(new Pair(i,euclidean_distance));
+             if(pq.size()>k){
+                 pq.poll();
+             }
+     }
+     int[][] ans=new int[k][2];
+     int idex=0;
+     while(!pq.isEmpty()){
+     ans[idex++]=points[pq.poll().indx];
+     }
+     return ans;
+   
+        
+    }
+}
+ 
