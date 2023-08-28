@@ -1,0 +1,76 @@
+You can find my Solution here: https://leetcode.com/problems/letter-combinations-of-a-phone-number/solutions/3971669/java-solution-beats-100-backtracking/
+
+Approach
+Traverse each char mapped to a particular digit one by one and append it with the chars mapped to another next digit of given string one by one and so on
+
+e.g A = "23"
+A.charAt(0)=2
+map[2] contains "abc"
+
+First take 'a' and try appending everey character of map[3] one by one
+a -> 'd'
+'e'
+'f'
+
+First take 'b' and try appending everey character of map[3] one by one
+b -> 'd'
+'e'
+'f'
+
+First take 'c' and try appending everey character of map[3] one by one
+c -> 'd'
+'e'
+'f'
+
+Base Codn: when str.length()==A.length(), add str to ans list
+
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
+
+Complexity
+Time complexity:O(4^n * n)
+
+Space complexity:O(n)
+
+
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        if(digits.length()==0){
+            return new ArrayList<String>();
+        }
+        //create a map array and map verey digit to its respective numbers on letter phone
+        String [] map=new String[10];
+        map[0]="0";
+        map[1]="1";
+        map[2]="abc";
+        map[3]="def";
+        map[4]="ghi"; 
+        map[5]="jkl";
+        map[6]="mno";
+        map[7]="pqrs";
+        map[8]="tuv";
+        map[9]="wxyz";
+        
+        //call function 
+        List<String> ans=new ArrayList<>();
+        StringBuilder str=new StringBuilder();
+        combination(digits,map,ans,str,0); //0 denites index which will denotes that we will start with index 0 of A String
+        return ans;
+    }
+    
+    private void combination(String A,String []map, List<String> ans,StringBuilder str,int index){
+        if(str.length()==A.length()){
+            ans.add(str.toString());
+            return;
+        }
+        //derive the indexth digit of a given string A
+        int digit=(int)(A.charAt(index) - '0'); 
+        
+        for(int i=0;i<map[digit].length();i++){
+            str.append(map[digit].charAt(i)); 
+            //now we will append character mapped to second digit of given string
+            combination(A,map,ans,str,index+1);
+            str.deleteCharAt(str.length()-1); 
+        }
+    }
+}
