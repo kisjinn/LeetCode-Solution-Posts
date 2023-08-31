@@ -1,0 +1,92 @@
+You can find my solution here: https://leetcode.com/problems/unique-paths-ii/solutions/3983625/java-solution-s-c-o-m-dp/
+
+Intuition:
+As we can move in right and down directions only so,
+Ways to reach a cell= ways to reach adjacent above cell + ways to reach adjacent left cell
+
+Complexity:
+Time complexity:O(n*m)
+
+Space complexity:O(n*m)
+
+Code
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+    int n = obstacleGrid.length;
+    int m= obstacleGrid[0].length;
+
+int[][] dp = new int[n][m];
+
+for(int i=0;i<n;i++){
+    for(int j=0;j<m;j++){
+        //if the obstacle is present then there is no way to reach that cell
+        if(obstacleGrid[i][j] == 1){ 
+            dp[i][j] = 0; 
+        }
+        //for starting position , there is only 1 way to reach that cell
+        else if(i==0 && j==0){ 
+            dp[i][j] = 1;
+        }
+        //for 0th row, can move in right direction only
+        else if (i==0){ 
+            dp[i][j] = dp[i][j-1]; 
+        }
+        //for first down, can move in down direction only
+        else if(j==0){
+        dp[i][j] = dp[i-1][j];
+        }
+        else
+        {
+        //ways to reach a cell of [row][col] other than 0th row and 0th col=ways to reach adjacent above cell + ways to reach adjacent left cell
+        dp[i][j] = dp[i][j-1] + dp[i-1][j];
+        }
+    }
+    }
+    return dp[n-1][m-1];
+    }
+}
+
+
+Optimization:
+To reduce space complexity, we can observe that
+1.ways to reach a cell= ways to reach adjacent above cell + ways to reach adjacent left cell
+So, we can store ways to reach adjacent upper cell and ways to reach adjacent left cell value in 1D matrix
+So, Space Complexity =O(m) where m=col size
+
+Space Optimized Code:
+
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+    int n = obstacleGrid.length;
+    int m= obstacleGrid[0].length;
+
+int[]dp = new int[m];
+
+for(int i=0;i<n;i++){
+    for(int j=0;j<m;j++){
+        //if the obstacle is present then there is no way to reach that cell
+        if(obstacleGrid[i][j] == 1){ 
+            dp[j] = 0; 
+        }
+        //for starting position , there is only 1 way to reach that cell
+        else if(i==0 && j==0){ 
+            dp[j] = 1;
+        }
+        //for 0th row, can move in right direction only
+        else if (i==0){ 
+            dp[j] = dp[j-1]; 
+        }
+        //for 0th col, can move in down direction only
+        else if(j==0){
+        dp[j] = dp[j];
+        }
+        else
+        {
+        //ways to reach a cell of [row][col] other than 0th row and 0th col=ways to reach adjacent above cell + ways to reach adjacent left cell
+        dp[j] = dp[j-1] + dp[j];
+        }
+    }
+    }
+    return dp[m-1];
+    }
+}
