@@ -1,0 +1,31 @@
+You can find my solution here:https://leetcode.com/problems/reverse-bits/solutions/3991316/java-solution/ 
+
+
+# Intuition
+The intuition is to shift and mask the bits correctly to achieve this reversal.
+
+# Approach
+1.Initialize ans to 0. This variable will hold the reversed bits.
+Iterate i from 0 to 31 
+2.In each iteration, right-shift the input integer n by i positions using (n >> i).Use & 1 to extracts the value of the current bit.
+3.Left-shift the current value of ans by 1 position (ans << 1) to make room for the next bit.
+4.Combine the current bit (extracted in step 4) with the updated ans using the bitwise OR operator |. 
+Repeat steps 2 to 4.
+
+# Complexity
+- Time complexity:O(1)
+
+- Space complexity:O(1)
+
+
+Code:
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int reverseBits(int n) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            ans = (ans << 1) | ((n >> i) & 1);
+        }
+        return ans;
+    }
+}
